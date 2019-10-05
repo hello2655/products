@@ -1,12 +1,20 @@
-#讀取檔案
+import os # operating system
+
 products = []
-with open('products.csv', 'r' , encoding='utf-8') as f:
-	for line in f:
-		if '品名,價格' in line:
-			continue#繼續
-		name, price = line.strip().split(',')
-		products.append([name, price])
-print(products)
+if os.path.isfile('products.csv'):#檢查檔案
+	print('yeah! 找到檔案了')
+	#讀取檔案
+	with open('products.csv', 'r' , encoding='utf-8') as f:
+		for line in f:
+			if '品名, 價格' in line:
+				#print('有進去呦～')
+				continue#繼續
+			name, price = line.strip().split(',')
+			products.append([name, price])
+	print(products)
+
+else:
+	print('找不到舊資料，將建立新檔案')
 
 #使用者輸入區段
 while  True:
@@ -31,6 +39,9 @@ with open('products.csv', 'w', encoding='utf-8') as f:
 	f.write('品名, 價格\n')
 	for p in products:
 		f.write(p[0] + ',' + p[1] + '\n')
+
+
+
 
 
 #data = [1, 3, 5, 7, 9] # 清單中裝著一些整數
